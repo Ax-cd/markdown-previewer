@@ -4,7 +4,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { input: null };
+    this.state = { input: "" };
   }
   render() {
     return (
