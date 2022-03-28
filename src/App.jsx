@@ -4,27 +4,38 @@ export default class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { input: "" };
+    this.state = { editorInput: "hello world" };
   }
+
+  handleEditorChange = (event) => {
+    this.setState({ editorInput: event.target.value });
+  };
+
   render() {
     return (
       <React.Fragment>
-        <h1>Markdown Previewer</h1>
-        <label for="editor"></label>
-        <textarea
-          name="editor"
-          id="editor"
-          cols="30"
-          rows="10"
-          value={this.state.input}
-        ></textarea>
+        <div>
+          <label for="editor">Editor</label>
+          <br />
+          <textarea
+            name="editor"
+            id="editor"
+            cols="50"
+            rows="5"
+            value={this.state.editorInput}
+            onChange={this.handleEditorChange}
+          ></textarea>
+        </div>
 
-        <div
-          id="preview"
-          onChange={(event) => {
-            this.setState({ input: event.target.value });
-          }}
-        ></div>
+        <div id="preview">
+          <label for="preview">Previewer</label>
+          <br />
+          <input
+            type="text"
+            value={this.state.editorInput}
+            onChange={this.handleEditorChange}
+          />
+        </div>
       </React.Fragment>
     );
   }
