@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { marked } from "marked";
 
 // use backquote over quote => backquote allow linebreaks
-const defaultText = `#This is a markdown previewer 
+const defaultText = `#This is a markdown previewer
 ##Write in the editor and preview the result
 This is a [link](https://reactjs.org/docs/getting-started.html) to React Documentation.
 You can add inline code, like so:
@@ -14,9 +14,9 @@ And add images!
 ![Img name](url)
   `;
 
-marked.setOptions({
-  breaks: true,
-});
+// marked.setOptions({
+//   breaks: true,
+// });
 
 export default class App extends Component {
   constructor(props) {
@@ -27,6 +27,11 @@ export default class App extends Component {
 
   handleEditorChange = (event) => {
     this.setState({ editorInput: event.target.value });
+  };
+
+  getMarkdownText = () => {
+    let text = marked.parse(this.state);
+    return { __html: text };
   };
 
   render() {
@@ -52,8 +57,9 @@ export default class App extends Component {
             type="text"
             // value={this.state.editorInput}
             // onChange={this.handleEditorChange}
-            // dangerouslySetInnerHTML={{ __html: editorInput }}
-          />
+            dangerouslySetInnerHTML={this.getMarkdownText}
+            // dangerouslySetInnerHTML={{ __html: inputText }}
+          ></input>
         </div>
       </React.Fragment>
     );
