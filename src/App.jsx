@@ -1,29 +1,20 @@
 import React, { Component } from "react";
 import { marked } from "marked";
-// import DOMPurify from "dompurify";
+import DOMPurify from "dompurify";
 
 // use backquote over quote => backquote allow linebreaks
-const defaultText = `# This is a markdown previewer
-## Write in the editor and preview the result
+const defaultText = `# This is a markdown previewer\n## Write in the editor and preview the result
 This is a [link](https://reactjs.org/docs/getting-started.html) to React Documentation.
 You can add inline code, like so:
 Or a code block
-Do you need to list items ? You can:
+Do you need to list items ? You can: ``
 What about a > blockquote ?
 Emphasis the **importance** of an element with **bolded text**.
 And add images!
 ![Img name](https://picsum.photos/id/1050/200/300)
   `;
 
-// marked.use({
-//   pedantic: false,
-//   gfm: true,
-//   breaks: true,
-//   sanitize: false,
-//   smartLists: true,
-//   smartypants: false,
-//   xhtml: false,
-// });
+marked.setOptions({ breaks: true });
 
 export default class App extends Component {
   constructor(props) {
@@ -37,8 +28,9 @@ export default class App extends Component {
   };
 
   getMarkdownText = (editorInput) => {
-    let __html = marked(editorInput);
-    // let cleanText = DOMPurify.sanitize(__html);
+    let __html = marked(editorInput, {
+      __html: DOMPurify.sanitize(editorInput),
+    });
     return { __html };
   };
 
