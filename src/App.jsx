@@ -3,20 +3,36 @@ import { marked } from "marked";
 import DOMPurify from "dompurify";
 
 // use backquote over quote => backquote allow linebreaks
+// need to separate backquotes with \
 const defaultText = `# This is a markdown previewer\n## Write in the editor and preview the result
 This is a [link](https://reactjs.org/docs/getting-started.html) to React Documentation.
-You can add inline code, like so:
-Or a code block
-Do you need to list items ? You can: ``<div></div>``
-What about a > blockquote ?
+
+You can add inline code, like so: \`<div></div>\`
+\`\`\`
+// And multi-line code:
+function Test(arg1, arg2) {
+  if (arg1 === arg2) {
+    return "Success!";
+  }
+}
+\`\`\`
+
+Do you need to list items ? You can:
+- Item 1
+- Item 2
+  - Item 2.1
+  - Item 2.2
+
+What about a 
+> Blockquote ?
+
 Emphasis the **importance** of an element with **bolded text**.
-And add images!
-![Img name](https://picsum.photos/id/1050/400)
+And even add images!
+![Img name](https://picsum.photos/id/1050/600/400)
   `;
 
 marked.setOptions({
   breaks: true,
-  // highlight: null,
 });
 
 export default class App extends Component {
