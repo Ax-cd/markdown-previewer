@@ -7,14 +7,17 @@ const defaultText = `# This is a markdown previewer\n## Write in the editor and 
 This is a [link](https://reactjs.org/docs/getting-started.html) to React Documentation.
 You can add inline code, like so:
 Or a code block
-Do you need to list items ? You can: ``
+Do you need to list items ? You can: ``<div></div>``
 What about a > blockquote ?
 Emphasis the **importance** of an element with **bolded text**.
 And add images!
-![Img name](https://picsum.photos/id/1050/200/300)
+![Img name](https://picsum.photos/id/1050/400)
   `;
 
-marked.setOptions({ breaks: true });
+marked.setOptions({
+  breaks: true,
+  // highlight: null,
+});
 
 export default class App extends Component {
   constructor(props) {
@@ -55,6 +58,7 @@ export default class App extends Component {
           <br />
           <div
             id="preview"
+            // wasn't working previously because only had this.getMarkdownText and forgot this.state.editorInput
             dangerouslySetInnerHTML={this.getMarkdownText(
               this.state.editorInput
             )}
