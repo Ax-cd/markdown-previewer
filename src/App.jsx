@@ -2,10 +2,8 @@ import React, { Component } from "react";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
 
-// use backquote over quote => backquote allow linebreaks
-// need to separate backquotes with \
 const defaultText = `# This is a markdown previewer\n## Write in the editor and preview the result
-This is a [link](https://reactjs.org/docs/getting-started.html) to React Documentation.
+This is a [link to React Documentation](https://reactjs.org/docs/getting-started.html).
 
 You can add inline code, like so: \`<div></div>\`
 \`\`\`
@@ -55,10 +53,10 @@ export default class App extends Component {
 
   render() {
     return (
-      <div className="container">
+      <main className="container-fluid mt-5">
         <div className="row">
-          <div className="col-sm-6">
-            <label for="editor" className="form-label">
+          <div className="col-sm">
+            <label for="editor" className="label">
               Editor
             </label>
             <br />
@@ -72,19 +70,18 @@ export default class App extends Component {
               onChange={this.handleEditorChange}
             ></textarea>
           </div>
-          <div className="col-sm-6">
-            <label for="preview">Previewer</label>
+          <div className="col-sm">
+            <span className="label">Previewer</span>
             <br />
             <div
               id="preview"
-              // wasn't working previously because only had this.getMarkdownText and forgot this.state.editorInput
               dangerouslySetInnerHTML={this.getMarkdownText(
                 this.state.editorInput
               )}
             />
           </div>
         </div>
-      </div>
+      </main>
     );
   }
 }

@@ -1,7 +1,5 @@
-* {
-  box-sizing: border-box;
-}
 body {
+  box-sizing: border-box;
   padding: 0;
   margin: 0;
   display: flex;
@@ -10,15 +8,47 @@ body {
   min-height: 100vh;
 }
 
-
-.col-sm-6 {
-  padding: 1.5rem;
+.label {
+  border: 2px solid hsl(190, 100%, 23%);
+  padding: 0 1rem;
+  color: white;
+  background-color: hsl(190, 100%, 23%);
 }
 
-#editor{
-  border: 2px solid salmon;
+#editor {
+  border-radius: 0;
+  background-color: hsl(160, 41%, 70%);
+  border: 5px solid hsl(190, 100%, 23%);
 }
 
 #preview {
-  border: 2px solid salmon;
+  background-color: hsl(160, 41%, 70%);
+  padding-top: 0.6rem;
+  padding-left: 0.5rem;
+  border: 5px solid hsl(190, 100%, 23%);
+}
+
+a {
+  color: #001219;
+  font-weight: bold;
+}
+a:visited {
+  color: hsl(300, 87%, 15%);
+}
+
+code {
+  background-color: white;
+  font-weight: bold;
+}
+
+blockquote {
+  border-left: 3px solid black;
+  padding-left: 0.5rem;
+  margin-left: 0.5rem;
+}
+
+img {
+  display: block;
+  max-width: 95%;
+  margin: 0.5rem auto;
 }
