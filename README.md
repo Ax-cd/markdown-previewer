@@ -1,70 +1,64 @@
-# Getting Started with Create React App
+# Markdown previewer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The user writes in the editor and can preview the elements converted to markdown.
+This project is the second final project for the Front End Development Librairies Certification of freeCodeCamp.
 
-## Available Scripts
+## Live site
 
-In the project directory, you can run:
+- Live Site URL: [GitHub Page](https://ax-cd.github.io/markdown-previewer/)
 
-### `npm start`
+## Description of the project
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Built with
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- [React](https://reactjs.org/) - JS library
+- CSS custom properties
+- Bootstrap
 
-### `npm test`
+### Challenges I faced and things I learned
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- using dangerouslySetInnerHTML to render the element in the preview block: it wasn't working previously because I only had this.getMarkdownText and forgot this.state.editorInput.
 
-### `npm run build`
+```
+<div dangerouslySetInnerHTML={this.getMarkdownText(this.state.editorInput)}/>
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- using DOMPurify: I mostly struggle with the syntax, and **where** to integrate it in the code. I tried at first to put it with 'dangerouslySetInnerHTML' but it wasn't working. So I tried several places until it worked, and the solution was to place it in the function converting text into markdown.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+  getMarkdownText = (editorInput) => {
+    let __html = marked(editorInput, {__html: DOMPurify.sanitize(editorInput)});
+    return { __html };
+  };
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- finally adding the defaultText: 1) the backquotes allow linebreaks and 2) an important detail to remember is to separate them with \ in the file
 
-### `npm run eject`
+```
+You can add inline code, like so: \`<div></div>\`
+\`\`\`
+// And multi-line code:
+function Test(arg1, arg2) {
+  if (arg1 === arg2) {
+    return "Success!";
+  }
+}
+\`\`\`
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Screenshot
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![](./src/desktop-design-screenshot.jpeg)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Links
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Frontend Mentor - [@Ax-cd](https://www.frontendmentor.io/profile/Ax-cd)
+- Instagram - [@ax.coding](https://www.instagram.com/ax.coding/)
 
-## Learn More
+## Credits and resources
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- [Marked Documentation](https://marked.js.org/) and particularly the [Advanced Usage Section](https://marked.js.org/using_advanced)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- ["Complete guide on React dangerouslySetInnerHTML" by Ruben Leija](https://linguinecode.com/post/complete-guide-react-dangerouslysetinnerhtml)
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [GitHub DOMPurify](https://github.com/cure53/DOMPurify)
