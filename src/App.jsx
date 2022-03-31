@@ -28,7 +28,7 @@ What about a
 
 Emphasis the **importance** of an element with **bolded text**.
 And even add images!
-![Img name](https://picsum.photos/id/1050/600/400)
+![Img name](https://picsum.photos/id/1050/400/200)
   `;
 
 marked.setOptions({
@@ -55,32 +55,36 @@ export default class App extends Component {
 
   render() {
     return (
-      <React.Fragment>
-        <div>
-          <label for="editor">Editor</label>
-          <br />
-          <textarea
-            name="editor"
-            id="editor"
-            cols="50"
-            rows="5"
-            value={this.state.editorInput}
-            onChange={this.handleEditorChange}
-          ></textarea>
+      <div className="container">
+        <div className="row">
+          <div className="col-sm-6">
+            <label for="editor" className="form-label">
+              Editor
+            </label>
+            <br />
+            <textarea
+              name="editor"
+              id="editor"
+              type="text"
+              className="form-control"
+              rows="35"
+              value={this.state.editorInput}
+              onChange={this.handleEditorChange}
+            ></textarea>
+          </div>
+          <div className="col-sm-6">
+            <label for="preview">Previewer</label>
+            <br />
+            <div
+              id="preview"
+              // wasn't working previously because only had this.getMarkdownText and forgot this.state.editorInput
+              dangerouslySetInnerHTML={this.getMarkdownText(
+                this.state.editorInput
+              )}
+            />
+          </div>
         </div>
-
-        <div>
-          <label for="preview">Previewer</label>
-          <br />
-          <div
-            id="preview"
-            // wasn't working previously because only had this.getMarkdownText and forgot this.state.editorInput
-            dangerouslySetInnerHTML={this.getMarkdownText(
-              this.state.editorInput
-            )}
-          />
-        </div>
-      </React.Fragment>
+      </div>
     );
   }
 }
